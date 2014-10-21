@@ -1,4 +1,4 @@
 minicurso-angularjs
 ===================
 
-Minicurso sobre AnglarJS
+Minicurso sobre AngularJS ministrado no ENCOINFO'2014.
