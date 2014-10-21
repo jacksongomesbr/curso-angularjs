@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html ng-app="loja" lang="pt-br">
+<head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="../../../vendor/bootstrap/css/bootstrap.min.css" />
+	<script type="text/javascript" src="../../../vendor/angularjs/angular.min.js"></script>
+	<script type="text/javascript" src="../../../vendor/angularjs/angular-locale_pt-br.js"></script>
+	<script type="text/javascript" src="../../../vendor/bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="app.js"></script>
+</head>
+<body>
+<div class="container">
+	<div ng-controller="LojaController as loja">
+		<div ng-repeat="produto in loja.produtos" class="produto row">
+			<div class="col-md-3">
+				<img ng-src="{{produto.imagem}}" class="img-responsive" />
+			</div>
+			<div class="col-md-9">
+				<h1>{{produto.nome}}</h1>
+				<p>{{produto.preco | currency}}</p>
+				<button ng-show="loja.produto.disponivelEmEstoque">Comprar</button>
+				
+				<section ng-init="tab = 1">
+					<ul class="nav nav-pills">
+						<li ng-class="{ active:tab === 1}"><a href ng-click="tab = 1">Descrição</a></li>
+						<li ng-class="{ active:tab === 2}"><a href ng-click="tab = 2">Especificações</a></li>
+						<li ng-class="{ active:tab === 3}"><a href ng-click="tab = 3">Opiniões dos clientes</a></li>
+					</ul>
+				</section>
+				
+				<div class="panel" ng-show="tab === 1">
+					<h4>Descrição</h4>
+					<p>{{produto.descricao}}</p>
+				</div>
+				
+				<div class="panel" ng-show="tab === 2">
+					<h4>Especificações</h4>
+					<p>{{produto.especificacoes}}</p>
+				</div>
+				
+				<div class="panel" ng-show="tab === 3">
+					<h4>Opiniões</h4>
+					<p>{{produto.opinioes}}</p>
+				</div>
+				
+			</div>
+			<hr></hr>
+		</div>
+	</div>
+</div>
+</body>
+</html>
