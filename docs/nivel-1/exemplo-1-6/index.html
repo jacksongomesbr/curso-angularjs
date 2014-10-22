@@ -12,7 +12,7 @@
 	<h1>{{loja.produto.nome}}</h1>
 	<p>R$ {{loja.produto.preco}}</p>
 	<p>{{loja.produto.descricao}}</p>
-	<button ng-show="loja.produto.disponivelEmEstoque">Comprar</button>
+	<button ng-show="loja.produto.disponivelEmEstoque()">Comprar</button>
 </div>
 
 </body>

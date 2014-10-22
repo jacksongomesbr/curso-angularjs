@@ -13,13 +13,13 @@
 	<div ng-controller="LojaController as loja">
 		<div ng-repeat="produto in loja.produtos" class="produto row">
 			<div class="col-md-3">
-				<img src="{{produto.imagem}}" class="img-responsive" />
+				<img ng-src="{{produto.imagem}}" class="img-responsive" />
 			</div>
 			<div class="col-md-9">
 				<h1>{{produto.nome}}</h1>
 				<p>{{produto.preco | currency}}</p>
 				<p>{{produto.descricao}}</p>
-				<button ng-show="loja.produto.disponivelEmEstoque">Comprar</button>
+				<button ng-show="produto.disponivelEmEstoque">Comprar</button>
 			</div>
 			<hr></hr>
 		</div>

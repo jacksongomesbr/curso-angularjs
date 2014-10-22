@@ -7,7 +7,10 @@ var produtos = [
 		nome: 'Impressora 3D',
 		preco: 5000,
 		descricao: 'Uma ótima impressora 3D!',
-		disponivelEmEstoque: false,
+		quantidadeEmEstoque: 2,
+		disponivelEmEstoque : function() {
+			return this.quantidadeEmEstoque > 0;
+		},
 		imagem : "imagens/impressora-3d.jpg",
 		especificacoes : "Detalhes da impressora 3D",
 		opinioes: ""
@@ -16,7 +19,10 @@ var produtos = [
 		nome: 'Ultra Ultrabook',
 		preco: 3000,
 		descricao: 'Estação de trabalho multimídia!',
-		disponivelEmEstoque: true,
+		disponivelEmEstoque : function() {
+			return this.quantidadeEmEstoque > 0;
+		},
+		quantidadeEmEstoque: 2,
 		imagem : "imagens/ultrabook.jpg",
 		especificacoes : "Detalhes do ultrabook",
 		opinioes: ""
@@ -25,7 +31,10 @@ var produtos = [
 		nome: 'Apontador Laser',
 		preco: 100,
 		descricao: 'Melhore 100% suas apresentações',
-		disponivelEmEstoque: true,
+		disponivelEmEstoque : function() {
+			return this.quantidadeEmEstoque > 0;
+		},
+		quantidadeEmEstoque: 2,
 		imagem : "imagens/apontador-laser.jpg",
 		especificacoes : "Detalhes do apontador laser",
 		opinioes: ""
@@ -34,6 +43,9 @@ var produtos = [
 
 app.controller('LojaController', function(){
 	this.produtos = produtos;
+	this.comprar = function(produto) {
+		produto.quantidadeEmEstoque--;
+	}
 });
 
 app.controller('PainelController', function(){

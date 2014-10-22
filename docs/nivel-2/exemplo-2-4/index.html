@@ -18,7 +18,7 @@
 			<div class="col-md-9">
 				<h1>{{produto.nome}}</h1>
 				<p>{{produto.preco | currency}}</p>
-				<button ng-show="produto.disponivelEmEstoque" ng-click="loja.comprar(produto)">Comprar</button>
+				<button ng-show="produto.disponivelEmEstoque()" ng-click="loja.comprar(produto)">Comprar</button>
 				
 				<section ng-controller="PainelController as painel">
 					<ul class="nav nav-pills">
