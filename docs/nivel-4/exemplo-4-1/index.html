@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html ng-app="loja" lang="pt-br">
+<head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="../../../vendor/bootstrap/css/bootstrap.min.css" />
+	<script type="text/javascript" src="../../../vendor/angularjs/angular.min.js"></script>
+	<script type="text/javascript" src="../../../vendor/angularjs/angular-locale_pt-br.js"></script>
+	<script type="text/javascript" src="../../../vendor/bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="app.js"></script>
+	<style type="text/css">
+	.ng-invalid.ng-dirty {
+		border-color: red;
+	}
+	.ng-valid.ng-dirty {
+		border-color: green;
+	}
+	</style>
+</head>
+<body>
+<div class="container">
+	<div ng-controller="LojaController as loja">
+		<div ng-repeat="produto in loja.produtos" class="produto row">
+			<div class="col-md-3">
+				<img ng-src="{{produto.imagem}}" class="img-responsive" />
+			</div>
+			<div class="col-md-9">
+				<div ng-include="'produto-cabecalho.html'"></div>
+				<button ng-show="produto.disponivelEmEstoque()" ng-click="loja.comprar(produto)">Comprar</button>
+				
+				<section ng-controller="PainelController as painel">
+					<ul class="nav nav-pills">
+						<li ng-class="{ active: painel.abaEstahSelecionada(1)}"><a href ng-click="painel.mostrarAba(1)">Descrição</a></li>
+						<li ng-class="{ active: painel.abaEstahSelecionada(2)}"><a href ng-click="painel.mostrarAba(2)">Especificações</a></li>
+						<li ng-class="{ active: painel.abaEstahSelecionada(3)}"><a href ng-click="painel.mostrarAba(3)">Opiniões dos clientes</a></li>
+					</ul>
+					
+					<div class="panel" ng-show="painel.abaEstahSelecionada(1)">
+						<h4>Descrição</h4>
+						<p>{{produto.descricao}}</p>
+					</div>
+					
+					<div class="panel" ng-show="painel.abaEstahSelecionada(2)">
+						<h4>Especificações</h4>
+						<p>{{produto.especificacoes}}</p>
+					</div>
+					
+					<div class="panel" ng-show="painel.abaEstahSelecionada(3)">
+						<h4>Opiniões</h4>
+						
+						<blockquote ng-repeat="opiniao in produto.opinioes">
+							<b>Estrelas: {{opiniao.estrelas}}</b> - 
+							{{opiniao.texto}}
+							<cite>por: {{opiniao.autor}}</cite>
+						</blockquote>
+						
+						<form role="form" name="formOpiniao" ng-controller="OpiniaoController as review" ng-submit="formOpiniao.$valid && review.salvar(produto)">
+							<div class="form-group">
+								<select ng-model="review.opiniao.estrelas" class="form-control">
+									<option value="1">1 estrela</option>
+									<option value="2">2 estrelas</option>
+									<option value="3">3 estrelas</option>
+									<option value="4">4 estrelas</option>
+									<option value="5">5 estrelas</option>
+								</select>
+							</div>
+							<div class="form-group">
+								<textarea ng-model="review.opiniao.texto" class="form-control" placeholder="Opinião sobre o produto" required></textarea>
+							</div>
+							<div class="form-group">
+								<input type="email" ng-model="review.opiniao.autor" class="form-control" placeholder="Seu e-mail" required />
+							</div>
+							<button type="submit" class="btn btn-default">Salvar</button>
+						</form>
+					</div>					
+				</section>
+			</div>
+			<hr></hr>
+		</div>
+	</div>
+</div>
+</body>
+</html>
